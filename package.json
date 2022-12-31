@@ -1,0 +1,28 @@
+{
+  "name": "upi_recon",
+  "version": "1.0.0",
+  "description": "filnd the name of the upi account ..",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/princekrvert/upi_recon.git"
+  },
+  "keywords": [
+    "nodesj",
+    "princekrvert",
+    "termux",
+    "javascript"
+  ],
+  "author": "prince kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/princekrvert/upi_recon/issues"
+  },
+  "homepage": "https://github.com/princekrvert/upi_recon#readme",
+  "dependencies": {
+    "axios": "^1.2.2"
+  }
+}
