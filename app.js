@@ -1,6 +1,7 @@
 const axios = require("axios").default;
 const process = require("process");
 const fs = require("fs");
+const lineReader = require('line-reader');
 // thsi script is made by prince kumar 
 // this is the beta version of the script , update will come soon 
 // make a small banner
@@ -23,7 +24,8 @@ function help(){
 //handle the argument in node js 
 if(process.argv.length == 2){
 	// call the help function 
-	help();}
+	help();
+process.exit(0)}
 else if(process.argv.length > 3){
 	console.log("Too many argument");
 } else
@@ -39,29 +41,27 @@ fs.readFile("suffix.txt",'utf-8',(err,data) =>{
 		console.log("err");
 		return;
 	}
-	let all_id = data.split(/\r\?n/)
-	all_id.forEach(id =>{
-		const session = axios.create();
+	const session = axios.create();
         session.defaults.withCredentials = true;
         session.defaults.headers['User-Agent'] = "Mozilla/5.0 (Linux; Android 7.0; SM-G892A Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.107 Mobile Safari/537.36";
+	let all_id = data.split(/().*\/n/)
+	lineReader.eachLine('suffix.txt', (line, last) => {
+		let search_id = s_id
           session({
         method : "post",
-        url : `https://upibankvalidator.com/api/upiValidation?upi=${s_id}@${id}`
+        url : `https://upibankvalidator.com/api/upiValidation?upi=${search_id}@${line}`
     }).then((res) => { 
     	if (res.status == 200){
-    		console.log("UPI found:")
-    		let user_data = JSON.stringify(res.data);
-    		console.log(user_data);
+    		console.log(`UPI id ${search_id}@${line}`);
+			console.log(res.data.name)
+			console.log(res.data.message)
     	}
     	else if(res.status == 429){
     		process.stdout.write("\033[31;1mToo many requests\n");
     	}
-
-
     })
     .catch(err =>{
     	console.log(err);
     })
-	}
-	)
+	});
 })
