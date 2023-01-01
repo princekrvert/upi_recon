@@ -14,7 +14,7 @@
 
 *`git clone https://github.com/princekrvert/upi_recon.git`
 
-*`cd upi_recon
+*`cd upi_recon`
 
 
 *`npm install `
